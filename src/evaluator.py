@@ -298,7 +298,7 @@ def confidence_calibration(model, tokenizer, dataset,
             attention_mask = inputs["attention_mask"][j]
             last_pos = attention_mask.sum().item() - 1
             token_logits = logits[j, last_pos, option_token_ids]
-            probs = torch.softmax(token_logits, dim=-1).cpu().numpy()
+            probs = torch.softmax(token_logits, dim=-1).float().cpu().numpy()
 
             pred_idx = probs.argmax()
             pred_letter = "ABCD"[pred_idx]
