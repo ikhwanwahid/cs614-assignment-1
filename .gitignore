@@ -13,5 +13,8 @@ wheels/
 results/*/checkpoint-*/
 results/*/adapter/
 
+# Docs
+docs/
+
 # OS files
 .DS_Store
