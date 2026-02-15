@@ -2,14 +2,14 @@ import json
 import os
 import time
 
-from transformers import EarlyStoppingCallback, TrainingArguments
-from trl import SFTTrainer
+from transformers import EarlyStoppingCallback
+from trl import SFTConfig, SFTTrainer
 
 
-def get_training_args(config) -> TrainingArguments:
-    """Build TrainingArguments from ExperimentConfig."""
+def get_training_args(config) -> SFTConfig:
+    """Build SFTConfig from ExperimentConfig."""
     output_dir = os.path.join(config.output_dir, config.name)
-    return TrainingArguments(
+    return SFTConfig(
         output_dir=output_dir,
         num_train_epochs=config.num_train_epochs,
         per_device_train_batch_size=config.per_device_train_batch_size,
@@ -33,6 +33,10 @@ def get_training_args(config) -> TrainingArguments:
         seed=config.seed,
         gradient_checkpointing=True,
         gradient_checkpointing_kwargs={"use_reentrant": False},
+        # SFT-specific args (moved from SFTTrainer constructor)
+        max_seq_length=config.max_seq_length,
+        dataset_text_field="text",
+        packing=False,
     )
 
 
@@ -47,9 +51,6 @@ def create_trainer(model, tokenizer, train_dataset, eval_dataset,
         args=training_args,
         train_dataset=train_dataset,
         eval_dataset=eval_dataset,
-        max_seq_length=config.max_seq_length,
-        dataset_text_field="text",
-        packing=False,
         callbacks=[EarlyStoppingCallback(early_stopping_patience=3)],
     )
 
@@ -70,7 +71,7 @@ def train_and_save(trainer: SFTTrainer, config) -> dict:
     # Save adapter and tokenizer
     adapter_dir = os.path.join(output_dir, "adapter")
     trainer.model.save_pretrained(adapter_dir)
-    trainer.tokenizer.save_pretrained(adapter_dir)
+    trainer.processing_class.save_pretrained(adapter_dir)
 
     # Save training log
     log_path = os.path.join(output_dir, "training_log.json")
