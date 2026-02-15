@@ -34,7 +34,7 @@ def get_training_args(config) -> SFTConfig:
         gradient_checkpointing=True,
         gradient_checkpointing_kwargs={"use_reentrant": False},
         # SFT-specific args (moved from SFTTrainer constructor)
-        max_seq_length=config.max_seq_length,
+        max_length=config.max_seq_length,
         dataset_text_field="text",
         packing=False,
     )
