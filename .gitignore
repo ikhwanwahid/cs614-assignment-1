@@ -10,6 +10,7 @@ wheels/
 .venv
 
 # Model checkpoints (large files)
+results/
 results/*/checkpoint-*/
 results/*/adapter/
 
