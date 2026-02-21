@@ -68,7 +68,7 @@ cs614-assignment-1/
 4. Run the **setup cell** (Section 0 in `main_notebook.ipynb`). It will:
    - Mount your Google Drive
    - Ask for a GitHub Personal Access Token (PAT) — you need at least `repo` read access
-   - Clone the repository to `/content/cs614-assignment-1-main`
+   - Clone the repository to `/content/cs614-assignment-1`
    - Install all Python dependencies
    - Set up `RESULTS_DIR` on Google Drive for persistent storage
 
