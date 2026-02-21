@@ -81,7 +81,7 @@ cs614-assignment-1/
 
 6. Results (JSON metrics, plots, model adapters) are saved to `/content/drive/MyDrive/cs614_results/` so they survive runtime disconnects.
 
-### Option B: Upload as a ZIP
+### Option B: Upload as a ZIP into Gdrive
 
 > Use this if you received the project as a zip file and don't have GitHub access.
 
@@ -91,7 +91,7 @@ cs614-assignment-1/
 
 3. **Upload the project folder to Google Drive:**
    - Go to https://drive.google.com/
-   - Upload the entire `cs614-assignment-1/` folder to your Drive root (or any location you prefer)
+   - Upload the entire `cs614-assignment-1-main/` folder to your Drive root (or any location you prefer)
 
 4. **Upload the notebook:**
    - In Colab, go to `File` > `Upload notebook`
@@ -114,7 +114,7 @@ cs614-assignment-1/
 
    # Point to your uploaded project folder
    # CHANGE THIS PATH if you uploaded to a different location
-   PROJECT_ROOT = "/content/drive/MyDrive/cs614-assignment-1"
+   PROJECT_ROOT = "/content/drive/MyDrive/cs614-assignment-1-main"
    os.chdir(PROJECT_ROOT)
 
    # Install dependencies
