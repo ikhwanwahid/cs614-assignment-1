@@ -260,6 +260,8 @@ On a T4 GPU, expect roughly 2-3x longer for training.
 
 ### Output Files
 
+**Note:** All 6 LoRA adapters and training checkpoints (including optimizer states and gradients) were produced and saved to Google Drive during training. The adapters are stored in each config's `adapter/` subdirectory, and intermediate checkpoints (with full optimizer/scheduler state) are in `checkpoint-*/` subdirectories. These artifacts are not included in the git repository due to their size (~160 MB each) but are generated automatically when you run the training cells.
+
 After a complete run, `RESULTS_DIR` will contain:
 
 ```
@@ -278,7 +280,9 @@ cs614_results/
 ├── confusion_matrix_*.png          # Confusion matrices (zero-shot, 3-shot, fine-tuned)
 ├── prompt_template_comparison.png  # Accuracy by prompt template
 ├── config_1_baseline/              # Config-specific results
-│   ├── adapter/                    # Saved LoRA adapter weights
+│   ├── adapter/                    # Saved LoRA adapter weights (adapter_model.safetensors)
+│   ├── checkpoint-600/             # Training checkpoint with optimizer states & gradients
+│   ├── checkpoint-900/             # (multiple checkpoints per config)
 │   ├── training_log.json           # Full training log history
 │   ├── training_summary.json       # Best eval loss, training time
 │   ├── training_curve.png          # Train/eval loss plot
